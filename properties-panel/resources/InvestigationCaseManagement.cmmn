@@ -1,0 +1,570 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/CMMN/20151109/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:cmmndi="http://www.omg.org/spec/CMMN/20151109/CMMNDI" xmlns:dc="http://www.omg.org/spec/CMMN/20151109/DC" xmlns:di="http://www.omg.org/spec/CMMN/20151109/DI" xmlns:flowable="http://flowable.org/cmmn" xmlns:design="http://flowable.org/design" targetNamespace="http://flowable.org/cmmn" design:palette="flowable-work-case-palette">
+  <case id="InvestigationCaseManagement" name="Clearance Case Management" flowable:initiatorVariableName="initiator" flowable:candidateStarterGroups="flowableUser">
+    <documentation>Clearance Case Management</documentation>
+    <extensionElements>
+      <design:tag>Clearance</design:tag>
+    </extensionElements>
+    <casePlanModel id="IniitalStage" name="Clearance Case" flowable:formKey="individualInformation" flowable:formFieldValidation="false">
+      <extensionElements>
+        <flowable:default-menu-navigation-size>expanded</flowable:default-menu-navigation-size>
+        <flowable:owner>${initiator}</flowable:owner>
+        <flowable:assignee>${initiator}</flowable:assignee>
+        <flowable:work-form-field-validation>false</flowable:work-form-field-validation>
+        <design:stencilid>CasePlanModel</design:stencilid>
+      </extensionElements>
+      <planItem id="planItemApplicationStage" name="Application Gathering" definitionRef="ApplicationStage">
+        <itemControl>
+          <requiredRule />
+        </itemControl>
+      </planItem>
+      <planItem id="planItemInterviewsAndDocuments" name="Interviews and document collection" definitionRef="InterviewsAndDocuments">
+        <entryCriterion id="EntryCriterion_1psadxw" sentryRef="sentryEntryCriterion_1psadxw" />
+        <exitCriterion id="ExitCriterion_15" sentryRef="sentryExitCriterion_15" flowable:exitEventType="complete" />
+      </planItem>
+      <planItem id="planItemCleranceIssuance" name="Issue Clerance" definitionRef="CleranceIssuance">
+        <itemControl>
+          <requiredRule />
+        </itemControl>
+        <entryCriterion id="EntryCriterion_29" sentryRef="sentryEntryCriterion_29" />
+      </planItem>
+      <planItem id="planItemRecertification" name="Recertification " definitionRef="Recertification">
+        <entryCriterion id="EntryCriterion_33" sentryRef="sentryEntryCriterion_33" />
+      </planItem>
+      <planItem id="planItemApplicationApproveMilestone" name="Application Approved" definitionRef="ApplicationApproveMilestone">
+        <entryCriterion id="EntryCriterion_1pvqujx" sentryRef="sentryEntryCriterion_1pvqujx" />
+      </planItem>
+      <planItem id="planItemDocumentsCompleted" name="Docs and Interviews Completed" definitionRef="DocumentsCompleted">
+        <entryCriterion id="EntryCriterion_26" sentryRef="sentryEntryCriterion_26" />
+      </planItem>
+      <planItem id="planItemClearanceIssue" name="Clearance Issued" definitionRef="ClearanceIssue">
+        <entryCriterion id="EntryCriterion_32" sentryRef="sentryEntryCriterion_32" />
+      </planItem>
+      <planItem id="planItemCloseCaseListener" name="Close Case" definitionRef="CloseCaseListener" />
+      <sentry id="sentrycmmnExitSentry_10">
+        <extensionElements>
+          <design:stencilid>ExitCriterion</design:stencilid>
+          <design:fontsize>12</design:fontsize>
+          <design:fontweight>normal</design:fontweight>
+          <design:fontstyle>normal</design:fontstyle>
+          <design:fontcolor>#000000</design:fontcolor>
+        </extensionElements>
+        <planItemOnPart id="sentryOnPartcmmnExitSentry_10" sourceRef="planItemCloseCaseListener">
+          <standardEvent>occur</standardEvent>
+        </planItemOnPart>
+        <planItemOnPart id="PlanItemOnPart_1h5degp" sourceRef="planItemCloseCaseListener">
+          <standardEvent>occur</standardEvent>
+        </planItemOnPart>
+      </sentry>
+      <sentry id="sentryExitCriterion_15">
+        <extensionElements>
+          <design:stencilid>ExitCriterion</design:stencilid>
+        </extensionElements>
+        <planItemOnPart id="sentryOnPartExitCriterion_15" sourceRef="planItemCompleteDocumentAndVisits">
+          <standardEvent>occur</standardEvent>
+        </planItemOnPart>
+        <planItemOnPart id="PlanItemOnPart_0to531q" sourceRef="planItemCompleteDocumentAndVisits">
+          <standardEvent>occur</standardEvent>
+        </planItemOnPart>
+      </sentry>
+      <sentry id="sentryEntryCriterion_1psadxw">
+        <extensionElements>
+          <design:stencilid>EntryCriterion</design:stencilid>
+        </extensionElements>
+        <planItemOnPart id="sentryOnPartEntryCriterion_1psadxw" sourceRef="planItemApplicationStage">
+          <standardEvent>complete</standardEvent>
+        </planItemOnPart>
+        <planItemOnPart id="PlanItemOnPart_07a9l56" sourceRef="planItemApplicationStage">
+          <standardEvent>complete</standardEvent>
+        </planItemOnPart>
+      </sentry>
+      <sentry id="sentryEntryCriterion_29">
+        <extensionElements>
+          <design:stencilid>EntryCriterion</design:stencilid>
+        </extensionElements>
+        <planItemOnPart id="sentryOnPartEntryCriterion_29" sourceRef="planItemInterviewsAndDocuments">
+          <standardEvent>complete</standardEvent>
+        </planItemOnPart>
+        <planItemOnPart id="PlanItemOnPart_0wa1lu2" sourceRef="planItemInterviewsAndDocuments">
+          <standardEvent>complete</standardEvent>
+        </planItemOnPart>
+      </sentry>
+      <sentry id="sentryEntryCriterion_33">
+        <extensionElements>
+          <design:stencilid>EntryCriterion</design:stencilid>
+        </extensionElements>
+        <planItemOnPart id="sentryOnPartEntryCriterion_33" sourceRef="planItemCleranceIssuance">
+          <standardEvent>complete</standardEvent>
+        </planItemOnPart>
+        <planItemOnPart id="PlanItemOnPart_0gg69se" sourceRef="planItemCleranceIssuance">
+          <standardEvent>complete</standardEvent>
+        </planItemOnPart>
+      </sentry>
+      <sentry id="sentryEntryCriterion_1pvqujx">
+        <extensionElements>
+          <design:stencilid>EntryCriterion</design:stencilid>
+        </extensionElements>
+        <planItemOnPart id="sentryOnPartEntryCriterion_1pvqujx" sourceRef="planItemApplicationStage">
+          <standardEvent>complete</standardEvent>
+        </planItemOnPart>
+        <planItemOnPart id="PlanItemOnPart_1kgrkqj" sourceRef="planItemApplicationStage">
+          <standardEvent>complete</standardEvent>
+        </planItemOnPart>
+      </sentry>
+      <sentry id="sentryEntryCriterion_26">
+        <extensionElements>
+          <design:stencilid>EntryCriterion</design:stencilid>
+        </extensionElements>
+        <planItemOnPart id="sentryOnPartEntryCriterion_26" sourceRef="planItemInterviewsAndDocuments">
+          <standardEvent>complete</standardEvent>
+        </planItemOnPart>
+        <planItemOnPart id="PlanItemOnPart_1nxt5tz" sourceRef="planItemInterviewsAndDocuments">
+          <standardEvent>complete</standardEvent>
+        </planItemOnPart>
+      </sentry>
+      <sentry id="sentryEntryCriterion_32">
+        <extensionElements>
+          <design:stencilid>EntryCriterion</design:stencilid>
+        </extensionElements>
+        <planItemOnPart id="sentryOnPartEntryCriterion_32" sourceRef="planItemCleranceIssuance">
+          <standardEvent>complete</standardEvent>
+        </planItemOnPart>
+        <planItemOnPart id="PlanItemOnPart_0lapk34" sourceRef="planItemCleranceIssuance">
+          <standardEvent>complete</standardEvent>
+        </planItemOnPart>
+      </sentry>
+      <stage id="ApplicationStage" name="Application Gathering" autoComplete="true">
+        <documentation>This Stage is executed when all documents for the investigation are collected</documentation>
+        <extensionElements>
+          <design:stencilid>ExpandedStage</design:stencilid>
+        </extensionElements>
+        <planItem id="planItemcmmnTask_1" name="Request &#38; Approve info." definitionRef="cmmnTask_1">
+          <itemControl>
+            <requiredRule />
+          </itemControl>
+        </planItem>
+        <planItem id="planItemInterviewVisit" name="Interview Visit" definitionRef="InterviewVisit">
+          <itemControl>
+            <repetitionRule flowable:counterVariable="repetitionCounter" flowable:maxInstanceCount="1">
+              <extensionElements />
+            </repetitionRule>
+            <manualActivationRule />
+          </itemControl>
+        </planItem>
+        <processTask id="cmmnTask_1" name="Request &#38; Approve info." flowable:fallbackToDefaultTenant="true" flowable:sameDeployment="true">
+          <documentation>Request and approve information for an individual</documentation>
+          <extensionElements>
+            <design:stencilid>ProcessTask</design:stencilid>
+            <design:stencilsuperid>Task</design:stencilsuperid>
+            <flowable:in source="initiator" target="initiator" />
+            <flowable:in source="firstName" target="firstName" />
+            <flowable:in source="lastName" target="lastName" />
+            <flowable:in source="middleInitial" target="middleInitial" />
+            <flowable:in source="birthdate" target="birthdate" />
+            <flowable:in source="email" target="email" />
+            <flowable:in source="tel" target="tel" />
+            <flowable:in source="citizenship" target="citizenship" />
+            <flowable:in source="address1" target="address1" />
+            <flowable:in source="address2" target="address2" />
+            <flowable:in source="city" target="city" />
+            <flowable:in source="state" target="state" />
+            <flowable:in source="postalCode" target="postalCode" />
+            <flowable:in source="comments" target="comments" />
+            <flowable:in source="otherCitizenships" target="otherCitizenships" />
+            <flowable:out source="firstName" target="firstName" />
+            <flowable:out source="lastName" target="lastName" />
+            <flowable:out source="middleInitial" target="middleInitial" />
+            <flowable:out source="birthdate" target="birthdate" />
+            <flowable:out source="email" target="email" />
+            <flowable:out source="tel" target="tel" />
+            <flowable:out source="citizenship" target="citizenship" />
+            <flowable:out source="address1" target="address1" />
+            <flowable:out source="address2" target="address2" />
+            <flowable:out source="city" target="city" />
+            <flowable:out source="state" target="state" />
+            <flowable:out source="postalCode" target="postalCode" />
+            <flowable:out source="comments" target="comments" />
+            <flowable:out source="otherCitizenships" target="otherCitizenships" />
+            <flowable:out source="eligibility" target="eligibility" />
+          </extensionElements>
+          <processRefExpression>requestSupplementalInformation</processRefExpression>
+        </processTask>
+        <humanTask id="InterviewVisit" name="Interview Visit" flowable:owner="${initiator}" flowable:candidateUsers="SECURITY_OFFICER" flowable:formKey="SiteVisit" flowable:formFieldValidation="false" flowable:dueDate="P15D">
+          <documentation>Perform a Visit for an Interview</documentation>
+          <extensionElements>
+            <flowable:task-candidates-type>all</flowable:task-candidates-type>
+            <flowable:manual-activation-name>Site Visit</flowable:manual-activation-name>
+            <flowable:manual-activation-icon>address-book/regular</flowable:manual-activation-icon>
+            <design:stencilid>HumanTask</design:stencilid>
+            <design:stencilsuperid>Task</design:stencilsuperid>
+          </extensionElements>
+        </humanTask>
+      </stage>
+      <stage id="InterviewsAndDocuments" name="Interviews and document collection">
+        <documentation>This stage contains workflows and activities to collect documents from various sources and other tasks such as phone interviews and sites visits</documentation>
+        <extensionElements>
+          <design:stencilid>ExpandedStage</design:stencilid>
+        </extensionElements>
+        <planItem id="planItemSiteVisitTask" name="Site Visit" definitionRef="SiteVisitTask">
+          <itemControl>
+            <repetitionRule flowable:counterVariable="repetitionCounter" flowable:maxInstanceCount="1">
+              <extensionElements />
+            </repetitionRule>
+            <manualActivationRule />
+          </itemControl>
+        </planItem>
+        <planItem id="planItemRequestDocumentationTask" name="Request Documentation" definitionRef="RequestDocumentationTask">
+          <itemControl>
+            <manualActivationRule />
+          </itemControl>
+        </planItem>
+        <planItem id="planItemCompleteDocumentAndVisits" name="Complete Documents and Visits" definitionRef="CompleteDocumentAndVisits" />
+        <humanTask id="SiteVisitTask" name="Site Visit" flowable:owner="${initiator}" flowable:candidateUsers="SECURITY_OFFICER" flowable:formKey="SiteVisit" flowable:formFieldValidation="false" flowable:dueDate="P15D">
+          <documentation>Perform a Site Visit</documentation>
+          <extensionElements>
+            <flowable:task-candidates-type>all</flowable:task-candidates-type>
+            <flowable:manual-activation-name>Site Visit</flowable:manual-activation-name>
+            <flowable:manual-activation-icon>address-book/regular</flowable:manual-activation-icon>
+            <design:stencilid>HumanTask</design:stencilid>
+            <design:stencilsuperid>Task</design:stencilsuperid>
+          </extensionElements>
+        </humanTask>
+        <humanTask id="RequestDocumentationTask" name="Request Documentation" flowable:owner="${initiator}" flowable:candidateGroups="ADJUDICATOR" flowable:formKey="individualInformation" flowable:formFieldValidation="false" flowable:dueDate="P30D">
+          <documentation>This task sends information to request documentation</documentation>
+          <extensionElements>
+            <flowable:task-candidates-type>all</flowable:task-candidates-type>
+            <flowable:manual-activation-name>Request Documentation</flowable:manual-activation-name>
+            <flowable:manual-activation-icon>amp-guitar/regular</flowable:manual-activation-icon>
+            <design:stencilid>HumanTask</design:stencilid>
+            <design:stencilsuperid>Task</design:stencilsuperid>
+          </extensionElements>
+        </humanTask>
+        <userEventListener id="CompleteDocumentAndVisits" name="Complete Documents and Visits">
+          <documentation>This Stage completes documents and visits</documentation>
+          <extensionElements>
+            <design:stencilid>UserEventListener</design:stencilid>
+            <design:stencilsuperid>EventListener</design:stencilsuperid>
+            <design:display_ref_in_diagram>true</design:display_ref_in_diagram>
+          </extensionElements>
+        </userEventListener>
+      </stage>
+      <stage id="CleranceIssuance" name="Issue Clerance" autoComplete="true">
+        <documentation>After having all documentation, the information gathered will need certain activities</documentation>
+        <extensionElements>
+          <design:stencilid>ExpandedStage</design:stencilid>
+        </extensionElements>
+        <planItem id="planItemIssueClearance" name="Issue Clearance" definitionRef="IssueClearance">
+          <itemControl>
+            <requiredRule />
+          </itemControl>
+        </planItem>
+        <humanTask id="IssueClearance" name="Issue Clearance" flowable:owner="${initiator}" flowable:candidateGroups="SECURITY_OFFICER" flowable:formKey="individualInformation" flowable:formFieldValidation="false" flowable:dueDate="P90D">
+          <documentation>Issue a clearance</documentation>
+          <extensionElements>
+            <flowable:task-candidates-type>all</flowable:task-candidates-type>
+            <design:stencilid>HumanTask</design:stencilid>
+            <design:stencilsuperid>Task</design:stencilsuperid>
+          </extensionElements>
+        </humanTask>
+      </stage>
+      <stage id="Recertification" name="Recertification ">
+        <documentation>This stage checks after a period of time</documentation>
+        <extensionElements>
+          <design:stencilid>ExpandedStage</design:stencilid>
+        </extensionElements>
+        <planItem id="planItemTrimesterInvestigation" name="Trimester Investigation" definitionRef="TrimesterInvestigation">
+          <itemControl>
+            <manualActivationRule />
+          </itemControl>
+        </planItem>
+        <humanTask id="TrimesterInvestigation" name="Trimester Investigation" flowable:assignee="${initiator}" flowable:formKey="individualInformation" flowable:formFieldValidation="false" flowable:dueDate="P90D">
+          <documentation>Trimester Investigation</documentation>
+          <extensionElements>
+            <flowable:task-candidates-type>all</flowable:task-candidates-type>
+            <flowable:manual-activation-icon>arrows-spin/regular</flowable:manual-activation-icon>
+            <design:stencilid>HumanTask</design:stencilid>
+            <design:stencilsuperid>Task</design:stencilsuperid>
+          </extensionElements>
+        </humanTask>
+      </stage>
+      <milestone id="ApplicationApproveMilestone" name="Application Approved" flowable:milestoneVariable="Application Approved">
+        <documentation>An Application has been approved</documentation>
+        <extensionElements>
+          <design:stencilid>Milestone</design:stencilid>
+        </extensionElements>
+      </milestone>
+      <milestone id="DocumentsCompleted" name="Docs and Interviews Completed" flowable:milestoneVariable="Docs and Interviews Completed">
+        <documentation>Milestone when all documents and interviews have been performed</documentation>
+        <extensionElements>
+          <design:stencilid>Milestone</design:stencilid>
+        </extensionElements>
+      </milestone>
+      <milestone id="ClearanceIssue" name="Clearance Issued" flowable:milestoneVariable="Clearance Issued">
+        <documentation>Reached when clearance has been issued</documentation>
+        <extensionElements>
+          <design:stencilid>Milestone</design:stencilid>
+        </extensionElements>
+      </milestone>
+      <userEventListener id="CloseCaseListener" name="Close Case">
+        <extensionElements>
+          <design:stencilid>UserEventListener</design:stencilid>
+          <design:stencilsuperid>EventListener</design:stencilsuperid>
+          <design:display_ref_in_diagram>true</design:display_ref_in_diagram>
+        </extensionElements>
+      </userEventListener>
+      <exitCriterion id="cmmnExitSentry_10" sentryRef="sentrycmmnExitSentry_10" />
+    </casePlanModel>
+  </case>
+  <cmmndi:CMMNDI>
+    <cmmndi:CMMNDiagram id="CMMNDiagram_InvestigationCaseManagement">
+      <cmmndi:CMMNShape id="CMMNShape_IniitalStage" cmmnElementRef="IniitalStage">
+        <dc:Bounds x="156" y="71" width="973" height="671" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="CMMNShape_cmmnExitSentry_10" cmmnElementRef="cmmnExitSentry_10">
+        <dc:Bounds x="1120" y="551" width="18" height="28" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="CMMNShape_planItemApplicationStage" cmmnElementRef="planItemApplicationStage">
+        <dc:Bounds x="182" y="116" width="647" height="169" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="CMMNShape_planItemcmmnTask_1" cmmnElementRef="planItemcmmnTask_1">
+        <dc:Bounds x="198" y="156" width="128" height="76" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="CMMNShape_planItemInterviewVisit" cmmnElementRef="planItemInterviewVisit">
+        <dc:Bounds x="376" y="157" width="115" height="74" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="CMMNShape_planItemInterviewsAndDocuments" cmmnElementRef="planItemInterviewsAndDocuments">
+        <dc:Bounds x="166" y="347" width="647" height="126" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="CMMNShape_EntryCriterion_1psadxw" cmmnElementRef="EntryCriterion_1psadxw">
+        <dc:Bounds x="486" y="333" width="18" height="28" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="CMMNShape_ExitCriterion_15" cmmnElementRef="ExitCriterion_15">
+        <dc:Bounds x="804" y="408" width="18" height="28" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="CMMNShape_planItemSiteVisitTask" cmmnElementRef="planItemSiteVisitTask">
+        <dc:Bounds x="348" y="360" width="115" height="74" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="CMMNShape_planItemRequestDocumentationTask" cmmnElementRef="planItemRequestDocumentationTask">
+        <dc:Bounds x="214" y="363" width="116" height="67" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="CMMNShape_planItemCompleteDocumentAndVisits" cmmnElementRef="planItemCompleteDocumentAndVisits">
+        <dc:Bounds x="659" y="391" width="30" height="30" />
+        <cmmndi:CMMNLabel>
+          <dc:Bounds x="634" y="425" width="81" height="37" />
+        </cmmndi:CMMNLabel>
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="CMMNShape_planItemCleranceIssuance" cmmnElementRef="planItemCleranceIssuance">
+        <dc:Bounds x="166" y="517" width="368" height="145" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="CMMNShape_EntryCriterion_29" cmmnElementRef="EntryCriterion_29">
+        <dc:Bounds x="343" y="503" width="18" height="28" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="CMMNShape_planItemIssueClearance" cmmnElementRef="planItemIssueClearance">
+        <dc:Bounds x="205" y="541" width="100" height="80" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="CMMNShape_planItemRecertification" cmmnElementRef="planItemRecertification">
+        <dc:Bounds x="580" y="548" width="300" height="150" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="CMMNShape_EntryCriterion_33" cmmnElementRef="EntryCriterion_33">
+        <dc:Bounds x="571" y="608" width="18" height="28" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="CMMNShape_planItemTrimesterInvestigation" cmmnElementRef="planItemTrimesterInvestigation">
+        <dc:Bounds x="603" y="566" width="100" height="80" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="CMMNShape_planItemApplicationApproveMilestone" cmmnElementRef="planItemApplicationApproveMilestone">
+        <dc:Bounds x="913" y="173" width="150" height="55" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="CMMNShape_EntryCriterion_1pvqujx" cmmnElementRef="EntryCriterion_1pvqujx">
+        <dc:Bounds x="976" y="159" width="18" height="28" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="CMMNShape_planItemDocumentsCompleted" cmmnElementRef="planItemDocumentsCompleted">
+        <dc:Bounds x="913" y="246" width="150" height="55" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="CMMNShape_EntryCriterion_26" cmmnElementRef="EntryCriterion_26">
+        <dc:Bounds x="904" y="260" width="18" height="28" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="CMMNShape_planItemClearanceIssue" cmmnElementRef="planItemClearanceIssue">
+        <dc:Bounds x="913" y="423" width="150" height="55" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="CMMNShape_EntryCriterion_32" cmmnElementRef="EntryCriterion_32">
+        <dc:Bounds x="904" y="437" width="18" height="28" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="CMMNShape_planItemCloseCaseListener" cmmnElementRef="planItemCloseCaseListener">
+        <dc:Bounds x="973" y="550" width="30" height="30" />
+        <cmmndi:CMMNLabel>
+          <dc:Bounds x="945" y="593" width="57" height="13" />
+        </cmmndi:CMMNLabel>
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNEdge id="CMMNEdge_Connector_34" cmmnElementRef="planItemApplicationStage" targetCMMNElementRef="EntryCriterion_1psadxw">
+        <di:extension>
+          <flowable:docker type="source" x="324.0" y="85.0" />
+          <flowable:docker type="target" x="9.0" y="14.0" />
+        </di:extension>
+        <di:waypoint x="505.5" y="285" />
+        <di:waypoint x="505.5" y="309" />
+        <di:waypoint x="495" y="309" />
+        <di:waypoint x="495" y="333" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNEdge>
+      <cmmndi:CMMNEdge id="CMMNEdge_Connector_33" cmmnElementRef="planItemApplicationStage" targetCMMNElementRef="EntryCriterion_1pvqujx">
+        <di:extension>
+          <flowable:docker type="source" x="324.0" y="85.0" />
+          <flowable:docker type="target" x="9.0" y="14.0" />
+        </di:extension>
+        <di:waypoint x="829" y="200.5" />
+        <di:waypoint x="937" y="200.5" />
+        <di:waypoint x="937" y="296" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNEdge>
+      <cmmndi:CMMNEdge id="CMMNEdge_Connector_16" cmmnElementRef="planItemCompleteDocumentAndVisits" targetCMMNElementRef="ExitCriterion_15">
+        <di:extension>
+          <flowable:docker type="source" x="15.0" y="15.0" />
+          <flowable:docker type="target" x="9.0" y="14.0" />
+        </di:extension>
+        <di:waypoint x="717" y="422" />
+        <di:waypoint x="804" y="422" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNEdge>
+      <cmmndi:CMMNEdge id="CMMNEdge_Connector_27" cmmnElementRef="planItemInterviewsAndDocuments" targetCMMNElementRef="EntryCriterion_26">
+        <di:extension>
+          <flowable:docker type="source" x="324.0" y="63.0" />
+          <flowable:docker type="target" x="9.0" y="14.0" />
+        </di:extension>
+        <di:waypoint x="813" y="405.9862928929425" />
+        <di:waypoint x="856.1337958374628" y="406.79187314172447" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNEdge>
+      <cmmndi:CMMNEdge id="CMMNEdge_Connector_341" cmmnElementRef="planItemCleranceIssuance" targetCMMNElementRef="EntryCriterion_33">
+        <di:extension>
+          <flowable:docker type="source" x="184.0" y="73.0" />
+          <flowable:docker type="target" x="9.0" y="14.0" />
+        </di:extension>
+        <di:waypoint x="534" y="590" />
+        <di:waypoint x="571" y="589" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNEdge>
+      <cmmndi:CMMNEdge id="CMMNEdge_Connector_332" cmmnElementRef="planItemCleranceIssuance" targetCMMNElementRef="EntryCriterion_32">
+        <di:extension>
+          <flowable:docker type="source" x="184.0" y="73.0" />
+          <flowable:docker type="target" x="9.0" y="14.0" />
+        </di:extension>
+        <di:waypoint x="534" y="590" />
+        <di:waypoint x="537" y="485" />
+        <di:waypoint x="856.0177126612726" y="484.9724469713536" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNEdge>
+      <cmmndi:CMMNEdge id="CMMNEdge_cmmnConnector_11" cmmnElementRef="planItemCloseCaseListener" targetCMMNElementRef="cmmnExitSentry_10">
+        <di:extension>
+          <flowable:docker type="source" x="15.0" y="15.0" />
+          <flowable:docker type="target" x="9.0" y="14.0" />
+        </di:extension>
+        <di:waypoint x="955" y="565" />
+        <di:waypoint x="1026" y="565" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNEdge>
+      <cmmndi:CMMNEdge id="CMMNEdge_Connector_30" cmmnElementRef="planItemInterviewsAndDocuments" targetCMMNElementRef="EntryCriterion_29">
+        <di:extension>
+          <flowable:docker type="source" x="324.0" y="63.0" />
+          <flowable:docker type="target" x="9.0" y="14.0" />
+        </di:extension>
+        <di:waypoint x="373.2248974553308" y="473" />
+        <di:waypoint x="352" y="484.5" />
+        <di:waypoint x="352" y="503" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNEdge>
+      <cmmndi:CMMNEdge id="PlanItemOnPart_1kgrkqj_di" cmmnElementRef="PlanItemOnPart_1kgrkqj" targetCMMNElementRef="EntryCriterion_1pvqujx" isStandardEventVisible="true">
+        <di:waypoint x="829" y="143" />
+        <di:waypoint x="985" y="143" />
+        <di:waypoint x="985" y="159" />
+        <cmmndi:CMMNLabel>
+          <dc:Bounds x="865" y="110.5" width="51" height="13" />
+        </cmmndi:CMMNLabel>
+      </cmmndi:CMMNEdge>
+      <cmmndi:CMMNEdge id="PlanItemOnPart_07a9l56_di" cmmnElementRef="PlanItemOnPart_07a9l56" targetCMMNElementRef="EntryCriterion_1psadxw" isStandardEventVisible="true">
+        <di:waypoint x="506" y="285" />
+        <di:waypoint x="506" y="309" />
+        <di:waypoint x="495" y="309" />
+        <di:waypoint x="495" y="333" />
+        <cmmndi:CMMNLabel>
+          <dc:Bounds x="475" y="299" width="51" height="13" />
+        </cmmndi:CMMNLabel>
+      </cmmndi:CMMNEdge>
+      <cmmndi:CMMNEdge id="PlanItemOnPart_0to531q_di" cmmnElementRef="PlanItemOnPart_0to531q" targetCMMNElementRef="ExitCriterion_15" isStandardEventVisible="true">
+        <di:waypoint x="689" y="406" />
+        <di:waypoint x="767" y="406" />
+        <di:waypoint x="767" y="422" />
+        <di:waypoint x="804" y="422" />
+        <cmmndi:CMMNLabel>
+          <dc:Bounds x="721" y="390" width="34" height="13" />
+        </cmmndi:CMMNLabel>
+      </cmmndi:CMMNEdge>
+      <cmmndi:CMMNEdge id="PlanItemOnPart_0wa1lu2_di" cmmnElementRef="PlanItemOnPart_0wa1lu2" targetCMMNElementRef="EntryCriterion_29" isStandardEventVisible="true">
+        <di:waypoint x="490" y="473" />
+        <di:waypoint x="490" y="488" />
+        <di:waypoint x="352" y="488" />
+        <di:waypoint x="352" y="503" />
+        <cmmndi:CMMNLabel>
+          <dc:Bounds x="395" y="478" width="51" height="13" />
+        </cmmndi:CMMNLabel>
+      </cmmndi:CMMNEdge>
+      <cmmndi:CMMNEdge id="PlanItemOnPart_0gg69se_di" cmmnElementRef="PlanItemOnPart_0gg69se" targetCMMNElementRef="EntryCriterion_33" isStandardEventVisible="true">
+        <di:waypoint x="534" y="590" />
+        <di:waypoint x="553" y="590" />
+        <di:waypoint x="553" y="622" />
+        <di:waypoint x="571" y="622" />
+        <cmmndi:CMMNLabel>
+          <dc:Bounds x="809" y="481.5" width="51" height="13" />
+        </cmmndi:CMMNLabel>
+      </cmmndi:CMMNEdge>
+      <cmmndi:CMMNEdge id="PlanItemOnPart_1h5degp_di" cmmnElementRef="PlanItemOnPart_1h5degp" targetCMMNElementRef="cmmnExitSentry_10" isStandardEventVisible="true">
+        <di:waypoint x="1003" y="565" />
+        <di:waypoint x="1120" y="565" />
+        <cmmndi:CMMNLabel>
+          <dc:Bounds x="1030" y="544" width="34" height="13" />
+        </cmmndi:CMMNLabel>
+      </cmmndi:CMMNEdge>
+      <cmmndi:CMMNEdge id="PlanItemOnPart_1nxt5tz_di" cmmnElementRef="PlanItemOnPart_1nxt5tz" targetCMMNElementRef="EntryCriterion_26" isStandardEventVisible="true">
+        <di:waypoint x="813" y="381" />
+        <di:waypoint x="863" y="381" />
+        <di:waypoint x="863" y="274" />
+        <di:waypoint x="904" y="274" />
+        <cmmndi:CMMNLabel>
+          <dc:Bounds x="873" y="340.5" width="51" height="13" />
+        </cmmndi:CMMNLabel>
+      </cmmndi:CMMNEdge>
+      <cmmndi:CMMNEdge id="PlanItemOnPart_0lapk34_di" cmmnElementRef="PlanItemOnPart_0lapk34" targetCMMNElementRef="EntryCriterion_32" isStandardEventVisible="true">
+        <di:waypoint x="534" y="551" />
+        <di:waypoint x="557" y="551" />
+        <di:waypoint x="557" y="499" />
+        <di:waypoint x="883" y="499" />
+        <di:waypoint x="883" y="451" />
+        <di:waypoint x="904" y="451" />
+        <cmmndi:CMMNLabel>
+          <dc:Bounds x="669" y="527.5" width="51" height="13" />
+        </cmmndi:CMMNLabel>
+      </cmmndi:CMMNEdge>
+    </cmmndi:CMMNDiagram>
+  </cmmndi:CMMNDI>
+</definitions>

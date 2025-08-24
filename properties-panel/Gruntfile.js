@@ -93,7 +93,7 @@ module.exports = function(grunt) {
       less: {
         files: [
           'styles/**/*.less',
-          'node_modules/cmmn-js-properties-panel/styles/**/*.less'
+          'node_modules/cmmn-js-properties-panel-flowable/styles/**/*.less'
         ],
         tasks: [
           'less'

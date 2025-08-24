@@ -1,6 +1,6 @@
 # cmmn-js Modeler + Properties Panel Example
 
-This example uses [cmmn-js](https://github.com/bpmn-io/cmmn-js) and [cmmn-js-properties-panel](https://github.com/bpmn-io/cmmn-js-properties-panel). It implements a CMMN 1.1 modeler that allows you to edit execution related properties via a properties panel.
+This example uses [cmmn-js](https://github.com/bpmn-io/cmmn-js) and [cmmn-js-properties-panel-flowable](https://github.com/bpmn-io/cmmn-js-properties-panel-flowable). It implements a CMMN 1.1 modeler that allows you to edit execution related properties via a properties panel.
 
 
 ## About
@@ -12,10 +12,10 @@ This example is a node-style web application that builds an user interface aroun
 
 ## Usage
 
-Add the [properties panel](https://github.com/bpmn-io/cmmn-js-properties-panel) to your project:
+Add the [properties panel](https://github.com/bpmn-io/cmmn-js-properties-panel-flowable) to your project:
 
 ```
-npm install --save cmmn-js-properties-panel
+npm install --save cmmn-js-properties-panel-flowable
 ```
 
 Additionally, if you'd like to use [Camunda BPM](https://camunda.org) execution related properties, include the [camunda-cmmn-moddle](https://github.com/camunda/camunda-cmmn-moddle) dependency which tells the modeler about `camunda:XXX` extension properties:
@@ -27,9 +27,9 @@ npm install --save camunda-cmmn-moddle
 Now extend the [cmmn-js](https://github.com/bpmm-io/cmmn-js) modeler with two properties panel related modules, the panel itself and a provider module that controls which properties are visible for each element. Additionally you must pass an element via `propertiesPanel.parent` into which the properties panel will be rendered (cf. [`app/index.js`](./app/index.js#L16) for details).
 
 ```javascript
-var propertiesPanelModule = require('cmmn-js-properties-panel'),
+var propertiesPanelModule = require('cmmn-js-properties-panel-flowable'),
     // providing camunda executable properties, too
-    propertiesProviderModule = require('cmmn-js-properties-panel/lib/provider/camunda'),
+    propertiesProviderModule = require('cmmn-js-properties-panel-flowable/lib/provider/flowable'),
     camundaModdleDescriptor = require('camunda-cmmn-moddle/resources/camunda');
 
 var bpmnModeler = new BpmnModeler({

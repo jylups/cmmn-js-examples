@@ -2,9 +2,9 @@ import $ from 'jquery';
 
 import CmmnModeler from 'cmmn-js/lib/Modeler';
 
-import propertiesPanelModule from 'cmmn-js-properties-panel';
-import propertiesProviderModule from 'cmmn-js-properties-panel/lib/provider/camunda';
-import camundaModdleDescriptor from 'camunda-cmmn-moddle/resources/camunda';
+import propertiesPanelModule from 'cmmn-js-properties-panel-flowable';
+import propertiesProviderModule from 'cmmn-js-properties-panel-flowable/lib/provider/flowable';
+import flowableModdleDescriptor from 'flowable-cmmn-moddle/resources/flowable';
 
 import {
   debounce
@@ -25,7 +25,7 @@ var cmmnModeler = new CmmnModeler({
     propertiesProviderModule
   ],
   moddleExtensions: {
-    camunda: camundaModdleDescriptor
+    flowable: flowableModdleDescriptor
   }
 });
 
