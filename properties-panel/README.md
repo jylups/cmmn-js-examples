@@ -18,10 +18,10 @@ Add the [properties panel](https://github.com/bpmn-io/cmmn-js-properties-panel-f
 npm install --save cmmn-js-properties-panel-flowable
 ```
 
-Additionally, if you'd like to use [Camunda BPM](https://camunda.org) execution related properties, include the [camunda-cmmn-moddle](https://github.com/camunda/camunda-cmmn-moddle) dependency which tells the modeler about `camunda:XXX` extension properties:
+Additionally, if you'd like to use [Camunda BPM](https://camunda.org) execution related properties, include the [flowable-cmmn-moddle](https://github.com/camunda/flowable-cmmn-moddle) dependency which tells the modeler about `camunda:XXX` extension properties:
 
 ```
-npm install --save camunda-cmmn-moddle
+npm install --save flowable-cmmn-moddle
 ```
 
 Now extend the [cmmn-js](https://github.com/bpmm-io/cmmn-js) modeler with two properties panel related modules, the panel itself and a provider module that controls which properties are visible for each element. Additionally you must pass an element via `propertiesPanel.parent` into which the properties panel will be rendered (cf. [`app/index.js`](./app/index.js#L16) for details).
@@ -30,7 +30,7 @@ Now extend the [cmmn-js](https://github.com/bpmm-io/cmmn-js) modeler with two pr
 var propertiesPanelModule = require('cmmn-js-properties-panel-flowable'),
     // providing camunda executable properties, too
     propertiesProviderModule = require('cmmn-js-properties-panel-flowable/lib/provider/flowable'),
-    camundaModdleDescriptor = require('camunda-cmmn-moddle/resources/camunda');
+    camundaModdleDescriptor = require('flowable-cmmn-moddle/resources/flowable');
 
 var bpmnModeler = new BpmnModeler({
   container: '#js-canvas',
